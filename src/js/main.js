@@ -27,7 +27,7 @@ function paintMovies() {
   for (const serie of arrayFilms) {
     containerList.innerHTML += `<li class= "js-movies movies__name">${serie.show.name}`;
     containerList.innerHTML += `<img class="movies__image" src="${serie.show.image.medium}"></img>`;
-    containerList.innerHTML += `</li>`;
+    containerList.innerHTML += "</li>";
   }
 }
 function listenMovies() {
