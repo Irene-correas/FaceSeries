@@ -7,7 +7,7 @@ let arrayFilms = [];
 
 function getCharacter() {
   let input = document.querySelector(".page__input").value;
-  fetch(`http://api.tvmaze.com/search/shows?q=${input}`)
+  fetch(`//api.tvmaze.com/search/shows?q=${input}`)
     .then((result) => {
       return result.json();
     })
@@ -15,6 +15,8 @@ function getCharacter() {
     .then((data) => {
       arrayFilms = data;
       paintMovies();
+      listenMovies();
+
       console.log(arrayFilms);
     });
 }
@@ -23,15 +25,27 @@ button.addEventListener("click", getCharacter);
 function paintMovies() {
   // let containerList = "";
   for (const serie of arrayFilms) {
-    containerList.innerHTML += `<li class= "movies__name">${serie.show.name}</li>`;
+    containerList.innerHTML += `<li class= "js-movies movies__name">${serie.show.name}`;
     containerList.innerHTML += `<img class="movies__image" src="${serie.show.image.medium}"></img>`;
-    console.log(arrayFilms);
+    containerList.innerHTML += `</li>`;
   }
-
-
 }
-// console.log(containerList);
+function listenMovies() {
+  const liMovies = document.querySelectorAll(".js-movies");
+
+  for (let index = 0; index < liMovies.length; index++) {
+    liMovies[index].addEventListener("click", selectFavorites);
+
+  }
+}
+function selectFavorites(event) {
+  console.log('entro click');
+  const liFavorite = event.currentTarget;
+  liFavorite.classList.toggle("movies-favorite");
+  console.log(liFavorite);
+}
+
+
 
 // borrar
 button.click();
-
