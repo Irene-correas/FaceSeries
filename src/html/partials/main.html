@@ -1,6 +1,7 @@
 <main class="page__main">
-  <div>
+  <div class="js-movies-container">
     <h1 class="page__title">Buscador de series</h1>
+    <ul class="js-container-list">
     <form action="" method="get">
       <label for="page__input" for="search">Introduce aquí tu serie</label>
       <input
@@ -9,6 +10,7 @@
         id="search"
         placeholder="Sons of Anarchy"
         type="text"
+        value="girls"
       />
       <input
         class="page__btn"
@@ -17,10 +19,11 @@
         value="Buscar"
         type="button"
       />
+    </ul>
     </form>
   </div>
   <div>
     <h2 class="page__favorites">Tus favoritos</h2>
-    <ul class="page__list"></ul>
+    <ul class="page__list js-list" ></ul>
   </div>
 </main>
