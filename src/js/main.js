@@ -7,6 +7,7 @@ let arrayFilms = [];
 let arrayFavorites = [];
 
 function getCharacter() {
+  console.log("entro");
   let input = document.querySelector(".page__input").value;
   fetch(`//api.tvmaze.com/search/shows?q=${input}`)
     .then((result) => {
@@ -17,6 +18,7 @@ function getCharacter() {
       arrayFilms = data;
       paintMovies();
       listenMovies();
+      // setLocalStorage();
 
       console.log(arrayFilms);
     });
@@ -24,14 +26,23 @@ function getCharacter() {
 button.addEventListener("click", getCharacter);
 
 function paintMovies() {
+  let src = "";
   let html = "";
+
   for (const serie of arrayFilms) {
+    if (serie.show.image === null) {
+      src = "//via.placeholder.com/210x295/ffffff/666666/?text = TV";
+    } else {
+      src = serie.show.image.medium;
+    }
+
     html += `<li class= "js-movies movies__name" movieId="${serie.show.id}" > ${serie.show.name}`;
-    html += `<img class="movies__image" src="${serie.show.image.medium}">`;
+    html += `<img class="movies__image" src="${src}">`;
     html += `</li>`;
     containerList.innerHTML = html;
   }
 }
+
 function listenMovies() {
   const liMovies = document.querySelectorAll(".js-movies");
 
@@ -42,15 +53,19 @@ function listenMovies() {
 function selectFavorites(event) {
   const liFavorite = event.currentTarget;
   liFavorite.classList.toggle("movies-favorite");
+
   console.log(liFavorite);
   let movieId = liFavorite.getAttribute("movieId");
+  localStorage.setItem("liFavorite", JSON.stringify(liFavorite));
+
 
   for (let index = 0; index < arrayFilms.length; index++) {
-    if (arrayFilms[index].show.id == movieId) {
+    if (arrayFilms[index].show.id === movieId) {
       arrayFilms[index].isFavorite = !arrayFilms[index].isFavorite;
     }
   }
   paintMoviesFavorites();
+
 }
 
 function paintMoviesFavorites() {
@@ -64,6 +79,22 @@ function paintMoviesFavorites() {
   }
   document.querySelector(".js-list").innerHTML = html;
 }
+
+// // local storage
+// function setLocalStorage() {
+//   localStorage.setItem("liFavorite", JSON.stringify(liFavorite));
+//   console.log(setLocalStorage);
+// }
+// // coger info localstorage
+// function getlocalStorage() {
+//   arrayFavorites = JSON.parse(localStorage.getItem("LocalStorageList"));
+//   if (arrayFavorites === null) {
+//     arrayFavorites = [];
+//   }
+// }
+// getLocalStorage();
+
+
 
 // borrar
 button.click();
