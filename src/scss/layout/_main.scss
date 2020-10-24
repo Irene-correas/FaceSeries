@@ -4,3 +4,10 @@
 .movies-favorite {
   border: 5px solid rgba(4, 129, 231, 0.8);
 }
+.page__main {
+  display: flex;
+  flex-direction: row;
+}
+.container__favorites {
+  border: solid 10px green;
+}

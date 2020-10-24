@@ -4,6 +4,7 @@ const button = document.querySelector(".page__btn");
 // const containerMovies = document.querySelector("js-movies-container");
 let containerList = document.querySelector(".js-container-list");
 let arrayFilms = [];
+let arrayFavorites = [];
 
 function getCharacter() {
   let input = document.querySelector(".page__input").value;
@@ -23,11 +24,12 @@ function getCharacter() {
 button.addEventListener("click", getCharacter);
 
 function paintMovies() {
-  // let containerList = "";
+  let html = "";
   for (const serie of arrayFilms) {
-    containerList.innerHTML += `<li class= "js-movies movies__name">${serie.show.name}`;
-    containerList.innerHTML += `<img class="movies__image" src="${serie.show.image.medium}"></img>`;
-    containerList.innerHTML += "</li>";
+    html += `<li class= "js-movies movies__name" movieId="${serie.show.id}" > ${serie.show.name}`;
+    html += `<img class="movies__image" src="${serie.show.image.medium}">`;
+    html += `</li>`;
+    containerList.innerHTML = html;
   }
 }
 function listenMovies() {
@@ -35,17 +37,33 @@ function listenMovies() {
 
   for (let index = 0; index < liMovies.length; index++) {
     liMovies[index].addEventListener("click", selectFavorites);
-
   }
 }
 function selectFavorites(event) {
-  console.log('entro click');
   const liFavorite = event.currentTarget;
   liFavorite.classList.toggle("movies-favorite");
   console.log(liFavorite);
+  let movieId = liFavorite.getAttribute("movieId");
+
+  for (let index = 0; index < arrayFilms.length; index++) {
+    if (arrayFilms[index].show.id == movieId) {
+      arrayFilms[index].isFavorite = !arrayFilms[index].isFavorite;
+    }
+  }
+  paintMoviesFavorites();
 }
 
-
+function paintMoviesFavorites() {
+  let html = "";
+  for (const serie of arrayFilms) {
+    if (serie.isFavorite === true) {
+      html += `<li class= "js-movies movies__name">${serie.show.name}`;
+      html += `<img class="movies__image" src="${serie.show.image.medium}">`;
+      html += `</li>`;
+    }
+  }
+  document.querySelector(".js-list").innerHTML = html;
+}
 
 // borrar
 button.click();
