@@ -39,14 +39,16 @@ function paintMovies() {
     html += `<li class= "js-movies movies__name" movieId="${serie.show.id}" > ${serie.show.name}`;
     html += `<img class="movies__image" src="${src}">`;
     html += `</li>`;
-    containerList.innerHTML = html;
+
   }
+  containerList.innerHTML = html;
 }
 
 function listenMovies() {
   const liMovies = document.querySelectorAll(".js-movies");
 
   for (let index = 0; index < liMovies.length; index++) {
+    // Este es el click de la pelicula favorita
     liMovies[index].addEventListener("click", selectFavorites);
   }
 }
@@ -56,17 +58,30 @@ function selectFavorites(event) {
 
   console.log(liFavorite);
   let movieId = liFavorite.getAttribute("movieId");
-  localStorage.setItem("liFavorite", JSON.stringify(liFavorite));
 
 
+  // Iteración al array de films
   for (let index = 0; index < arrayFilms.length; index++) {
-    if (arrayFilms[index].show.id === movieId) {
+    if (arrayFilms[index].show.id === parseInt(movieId)) {
       arrayFilms[index].isFavorite = !arrayFilms[index].isFavorite;
     }
   }
-  paintMoviesFavorites();
+  // Funcion filter (crea una array con los elementos que cumplan la condicion (current,index,array))
+  const favoritesArray = arrayFilms.filter(function (current) {
+    if (current.isFavorite === true) {
+      return current;
+    }
+  })
+  // Guardar el resultado de la funcion filter en LocalStorage
+  localStorage.setItem("favorites", JSON.stringify(favoritesArray));
 
+  const name = localStorage.getItem("favorites");
+  console.log(name);
+
+  console.log(arrayFilms);
+  paintMoviesFavorites();
 }
+
 
 function paintMoviesFavorites() {
   let html = "";
@@ -79,21 +94,6 @@ function paintMoviesFavorites() {
   }
   document.querySelector(".js-list").innerHTML = html;
 }
-
-// // local storage
-// function setLocalStorage() {
-//   localStorage.setItem("liFavorite", JSON.stringify(liFavorite));
-//   console.log(setLocalStorage);
-// }
-// // coger info localstorage
-// function getlocalStorage() {
-//   arrayFavorites = JSON.parse(localStorage.getItem("LocalStorageList"));
-//   if (arrayFavorites === null) {
-//     arrayFavorites = [];
-//   }
-// }
-// getLocalStorage();
-
 
 
 // borrar
