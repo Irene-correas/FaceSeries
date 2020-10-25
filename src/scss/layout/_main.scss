@@ -1,7 +1,7 @@
 .page__container {
   display: block;
   border: solid 10px #eee5195e;
-  height: 60vh;
+  height: 52vh;
   text-align: center;
   -webkit-text-decoration-line: underline;
   text-decoration-line: underline;
@@ -23,20 +23,23 @@
   border-style: dotted;
   list-style: none;
 }
-.page__main {
+.page__list {
+  display: flex;
+  margin: 20px 0 20px 0;
 }
 .container__favorites {
   border: solid 10px #ee19a54d;
-  height: 30vh;
+  height: 52vh;
   text-align: center;
   text-decoration-line: underline;
   border-radius: 40px 10px;
+  overflow: scroll;
 }
 .js-container-list {
   display: flex;
   margin: 20px 0 20px 0;
 }
 .movies__name {
-  margin: 0 20px 0 20px;
+  margin: 0 10px 0 10px;
   list-style: none;
 }
