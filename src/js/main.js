@@ -1,13 +1,10 @@
 "use strict";
 
 const button = document.querySelector(".page__btn");
-// const containerMovies = document.querySelector("js-movies-container");
 let containerList = document.querySelector(".js-container-list");
 let arrayFilms = [];
-let arrayFavorites = [];
 
 function getCharacter() {
-  console.log("entro");
   let input = document.querySelector(".page__input").value;
   fetch(`//api.tvmaze.com/search/shows?q=${input}`)
     .then((result) => {
@@ -18,12 +15,10 @@ function getCharacter() {
       arrayFilms = data;
       paintMovies();
       listenMovies();
-      // setLocalStorage();
-
-      console.log(arrayFilms);
     });
 }
 button.addEventListener("click", getCharacter);
+const name = localStorage.getItem("favorites");
 
 function paintMovies() {
   let src = "";
@@ -39,7 +34,6 @@ function paintMovies() {
     html += `<li class= "js-movies movies__name" movieId="${serie.show.id}" > ${serie.show.name}`;
     html += `<img class="movies__image" src="${src}">`;
     html += `</li>`;
-
   }
   containerList.innerHTML = html;
 }
@@ -55,10 +49,7 @@ function listenMovies() {
 function selectFavorites(event) {
   const liFavorite = event.currentTarget;
   liFavorite.classList.toggle("movies-favorite");
-
-  console.log(liFavorite);
   let movieId = liFavorite.getAttribute("movieId");
-
 
   // Iteración al array de films
   for (let index = 0; index < arrayFilms.length; index++) {
@@ -71,17 +62,14 @@ function selectFavorites(event) {
     if (current.isFavorite === true) {
       return current;
     }
-  })
+  });
   // Guardar el resultado de la funcion filter en LocalStorage
   localStorage.setItem("favorites", JSON.stringify(favoritesArray));
 
-  const name = localStorage.getItem("favorites");
-  console.log(name);
 
-  console.log(arrayFilms);
+
   paintMoviesFavorites();
 }
-
 
 function paintMoviesFavorites() {
   let html = "";
@@ -95,6 +83,14 @@ function paintMoviesFavorites() {
   document.querySelector(".js-list").innerHTML = html;
 }
 
+// reset
+const reset = document.querySelector(".js-reset");
+function clickReset() {
+  document.querySelector(".js-list").innerHTML = "";
+  localStorage.clear();
+  for (const serie of arrayFilms) {
+    serie.isFavorite = false;
+  }
+}
 
-// borrar
-button.click();
+reset.addEventListener("click", clickReset);

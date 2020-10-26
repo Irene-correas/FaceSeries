@@ -3,14 +3,13 @@
     <h1 class="page__title">Buscador de series</h1>
   
     <form action="" method="get">
-      <label for="page__input" for="search">Introduce aquí tu serie</label>
+      <label for="page__label" for="search">Introduce aquí tu serie</label>
       <input
         class="page__input"
         name="search"
         id="search"
         placeholder="Sons of Anarchy"
         type="text"
-        value="girls"
       />
       <input
         class="page__btn"
@@ -26,7 +25,13 @@
     
   </div>
   <div class="container__favorites js-container-favorites">
+    <div class="title__favorites">
     <h2 class="page__favorites">Tus favoritos</h2>
+    <button type="reset" class="reset__btn js-reset">Reset
+      <i class="fa fa-trash-o" aria-hidden="true"></i>
+  </button>
+  </div>
     <ul class="page__list js-list" ></ul>
+    
   </div>
 </main>

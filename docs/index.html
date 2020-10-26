@@ -3,8 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Adalab Web Starter Kit</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+    <title>FaceSeries</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2? family = Grandstander: ital, wght @ 1,100 & display = swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./assets/css/main.css" />
     <link rel="icon" href="./assets/images/favicon.png" />
   </head>
@@ -12,8 +19,8 @@
   <body>
     <div class="page">
       <header class="page__header">
-        <img class="page__logo" src="./assets/images/cinema.png" alt="Adalab">
-        <h1>Series</h1>
+        <img class="page__logo" src="./assets/images/images.png" alt="Logo">
+        <h1 class="title">FaceSeries</h1>
       </header>
 
       <main class="page__main">
@@ -21,14 +28,13 @@
           <h1 class="page__title">Buscador de series</h1>
         
           <form action="" method="get">
-            <label for="page__input" for="search">Introduce aquí tu serie</label>
+            <label for="page__label" for="search">Introduce aquí tu serie</label>
             <input
               class="page__input"
               name="search"
               id="search"
               placeholder="Sons of Anarchy"
               type="text"
-              value="girls"
             />
             <input
               class="page__btn"
@@ -44,18 +50,29 @@
           
         </div>
         <div class="container__favorites js-container-favorites">
+          <div class="title__favorites">
           <h2 class="page__favorites">Tus favoritos</h2>
+          <button type="reset" class="reset__btn js-reset">Reset
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </button>
+        </div>
           <ul class="page__list js-list" ></ul>
+          
         </div>
       </main>
 
       <footer class="page__footer">
         <small>
-          &copy; Todos los derechos reservados
+          &copy; Todos los derechos reservados <a href="https://github.com/Irene-correas" target="_blank" >Irene Correas</a>
         </small>
       </footer>
 
     </div>
-    <script src="./assets/js/main.js"></script>
+    <script 
+    src="./assets/js/main.js">
+    </script>
+    <script 
+    src="https://kit.fontawesome.com/a3ee26e14e.js">
+    </script>
   </body>
 </html>
