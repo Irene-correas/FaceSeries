@@ -18,7 +18,7 @@ function getCharacter() {
     });
 }
 button.addEventListener("click", getCharacter);
-const name = localStorage.getItem("favorites");
+
 
 function paintMovies() {
   let src = "";
