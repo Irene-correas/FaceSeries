@@ -1,7 +1,6 @@
 "use strict";
 
 const button = document.querySelector(".page__btn");
-// const containerMovies = document.querySelector("js-movies-container");
 let containerList = document.querySelector(".js-container-list");
 let arrayFilms = [];
 
@@ -16,36 +15,96 @@ function getCharacter() {
       arrayFilms = data;
       paintMovies();
       listenMovies();
-
-      console.log(arrayFilms);
     });
 }
 button.addEventListener("click", getCharacter);
 
-function paintMovies() {
-  // let containerList = "";
-  for (const serie of arrayFilms) {
-    containerList.innerHTML += `<li class= "js-movies movies__name">${serie.show.name}`;
-    containerList.innerHTML += `<img class="movies__image" src="${serie.show.image.medium}"></img>`;
-    containerList.innerHTML += "</li>";
-  }
+if (localStorage.getItem("favorites") != null) {
+  let liFavorite = localStorage.getItem("favorites");
+  liFavorite = JSON.parse(liFavorite);
+  console.log(liFavorite);
+  paintMoviesFavorites();
 }
+
+
+function paintMovies() {
+  let src = "";
+  let html = "";
+
+  for (const serie of arrayFilms) {
+    if (serie.show.image === null) {
+      src = "//via.placeholder.com/210x295/ffffff/666666/?text = TV";
+    } else {
+      src = serie.show.image.medium;
+    }
+
+    html += `<li class= "js-movies movies__name" movieId="${serie.show.id}" > ${serie.show.name}`;
+    html += `<img class="movies__image" src="${src}">`;
+    html += `</li>`;
+  }
+  containerList.innerHTML = html;
+}
+
 function listenMovies() {
   const liMovies = document.querySelectorAll(".js-movies");
 
   for (let index = 0; index < liMovies.length; index++) {
+    // Este es el click de la pelicula favorita
     liMovies[index].addEventListener("click", selectFavorites);
-
   }
 }
 function selectFavorites(event) {
-  console.log('entro click');
   const liFavorite = event.currentTarget;
   liFavorite.classList.toggle("movies-favorite");
-  console.log(liFavorite);
+  let movieId = liFavorite.getAttribute("movieId");
+
+  // Iteración al array de films
+  for (let index = 0; index < arrayFilms.length; index++) {
+    if (arrayFilms[index].show.id === parseInt(movieId)) {
+      arrayFilms[index].isFavorite = !arrayFilms[index].isFavorite;
+    }
+  }
+  // Funcion filter (crea una array con los elementos que cumplan la condicion (current,index,array))
+  const favoritesArray = arrayFilms.filter(function (current) {
+    if (current.isFavorite === true) {
+      return current;
+    }
+  });
+  // Guardar el resultado de la funcion filter en LocalStorage
+  localStorage.setItem("favorites", JSON.stringify(favoritesArray));
+
+
+
+  paintMoviesFavorites();
 }
 
+function paintMoviesFavorites() {
+  let html = "";
+  for (const serie of arrayFilms) {
+    if (serie.isFavorite === true) {
+      html += `<li class= "js-movies movies__name">${serie.show.name}`;
+      html += `<img class="movies__image" src="${serie.show.image.medium}">`;
+      html += `</li>`;
+    }
+  }
+  if (liFavorite != null) {
+    for (const serie of liFavorite) {
+      html += `<li class= "js-movies movies__name">${serie.show.name}`;
+      html += `<img class="movies__image" src="${serie.show.image.medium}">`;
+      html += `</li>`;
+    }
+  }
+  document.querySelector(".js-list").innerHTML = html;
+}
 
+// reset
+const reset = document.querySelector(".js-reset");
+function clickReset() {
+  document.querySelector(".js-list").innerHTML = "";
+  localStorage.clear();
+  for (const serie of arrayFilms) {
+    serie.isFavorite = false;
+  }
+}
 
-// borrar
-button.click();
+reset.addEventListener("click", clickReset);
