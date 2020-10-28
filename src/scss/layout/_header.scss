@@ -1,5 +1,22 @@
 .page__header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 3rem;
+  margin-bottom: 30px;
+
+  .page__logo {
+    height: 60px;
+    width: 80px;
+    background-color: #ee8dcc4d;
+    border: 3px solid #ee19a54d;
+    border-radius: 20px;
+    padding: 5px;
+  }
+}
+.title {
+  height: 60px;
+  width: 180px;
+  background-color: #ee8dcc4d;
+  border: 3px solid #ee19a54d;
+  border-radius: 20px;
+  padding: 5px;
 }

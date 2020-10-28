@@ -19,6 +19,7 @@ function getCharacter() {
 }
 button.addEventListener("click", getCharacter);
 
+<<<<<<< HEAD
 if (localStorage.getItem("favorites") != null) {
   let liFavorite = localStorage.getItem("favorites");
   liFavorite = JSON.parse(liFavorite);
@@ -26,6 +27,8 @@ if (localStorage.getItem("favorites") != null) {
   paintMoviesFavorites();
 }
 
+=======
+>>>>>>> master
 
 function paintMovies() {
   let src = "";
@@ -87,6 +90,7 @@ function paintMoviesFavorites() {
       html += `</li>`;
     }
   }
+<<<<<<< HEAD
   if (liFavorite != null) {
     for (const serie of liFavorite) {
       html += `<li class= "js-movies movies__name">${serie.show.name}`;
@@ -94,6 +98,8 @@ function paintMoviesFavorites() {
       html += `</li>`;
     }
   }
+=======
+>>>>>>> master
   document.querySelector(".js-list").innerHTML = html;
 }
 
